@@ -15,7 +15,7 @@ export default class Conversor extends Component {
 
     converter() {
         let de_para = `${this.props.moedaA}_${this.props.moedaB}`;
-        let url = `https://free.currconv.com/api/v7/convert?q=${de_para}&compact=ultra&apiKey=a32d968db49b747354ce`
+        let url = `Coloque aqui sua url`
         
         fetch(url)
             .then(res => {
