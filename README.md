@@ -2,8 +2,9 @@
 
 ## Running localy 
 
-cd conversor-de-moedas
-npm install react-scripts --save
+cd conversor-de-moedas.
+
+npm install.
 
 In the project directory, you can run:
 
