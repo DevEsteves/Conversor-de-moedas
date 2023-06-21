@@ -1,20 +1,10 @@
-import React, { Component } from 'react'
-import './Conversor.css'
+import React, { useRef, useState } from "react"
 
-export default class Conversor extends Component {
+export default function Conversor ({moedaA,moedaB}) {
+    const [moedaA_valor, setMoedaA] = useState('');
+    const [moedaB_valor, setMoedaB] = useState(0);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            moedaA_valor: "",
-            moedaB_valor: 0,
-        }
-        this.converter = this.converter.bind(this);
-    }
-
-    converter() {
-        let de_para = `${this.props.moedaA}_${this.props.moedaB}`;
+    function converter() {
         let url = `Coloque aqui sua url`
         
         fetch(url)
@@ -22,20 +12,18 @@ export default class Conversor extends Component {
                 return res.json()
             })
             .then(json => {
-                let cotacao = json[de_para]
-                let moedaB_valor = (parseFloat(this.state.moedaA_valor) * cotacao).toFixed(2)
-                this.setState({ moedaB_valor })
+                let cotacao = json.data[moedaB].value
+                let moedaB_valor = (parseFloat(moedaA_valor) * cotacao).toFixed(2)
+                setMoedaB( moedaB_valor )
             })
     }
 
-    render() {
-        return (
-            <div className="conversor">
-                <h2>Converter {this.props.moedaA} para {this.props.moedaB}</h2>
-                <input type="text" onChange={(event)=>{this.setState({moedaA_valor:event.target.value})}}></input>
-                <input type="button" value="Converter" onClick={this.converter}></input>
-                <h2>{this.state.moedaB_valor}</h2>
-            </div>
-        )
-    }
+    return (
+        <div className="conversor">
+            <h2>Converter {moedaA} para {moedaB}</h2>
+            <input type="text" onChange={(event)=>{setMoedaA(event.target.value)}}></input>
+            <input type="button" value="Converter" onClick={converter}></input>
+            <h2>{moedaB_valor}</h2>
+        </div>
+    )
 }
