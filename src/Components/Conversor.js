@@ -4,8 +4,10 @@ export default function Conversor ({moedaA,moedaB}) {
     const [moedaA_valor, setMoedaA] = useState('');
     const [moedaB_valor, setMoedaB] = useState(0);
 
+    const API_KEY = 'sua api key'
+
     function converter() {
-        let url = `Coloque aqui sua url`
+        let url = `https://api.currencyapi.com/v3/latest?apikey=${API_KEY}&currencies=${moedaB}&base_currency=${moedaA}`
         
         fetch(url)
             .then(res => {
